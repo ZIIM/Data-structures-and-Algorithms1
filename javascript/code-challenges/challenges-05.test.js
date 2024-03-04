@@ -39,6 +39,7 @@ Write a function named checkValues that takes in an object and a value and retur
 
 const checkValues = (obj, value) => {
   // Solution code here...
+  return Object.values(obj).includes(value);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -62,6 +63,7 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 const updateNumbers = (obj) => {
   // Solution code here...
+  return Object.keys(obj).map(key => `${key}: ${obj[key]}`)
 };
 
 
@@ -116,8 +118,8 @@ const characters = [
 ];
 
 const getHouses = (arr) => {
-  let houses = [];
   // Solution code here...
+  let houses = arr.map(character => character.house);
   return houses;
 };
 
@@ -135,6 +137,20 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
+  // CHAT GPT!!!!!!
+  const foundCharacter = arr.find((char) => char.name === character);
+
+  // If the character is found, use Object.values to get an array of the character's properties' values.
+  if (foundCharacter) {
+    // Iterate over the values to find the 'children' property.
+    for (const value of Object.values(foundCharacter)) {
+      // Check if 'children' is an array and has at least one element.
+      if (Array.isArray(value) && value.length > 0) {
+        return true; // The character has children.
+      }
+    }
+  }
+  return false; // No matching character with children was found.
 
 };
 
